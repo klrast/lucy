@@ -1,6 +1,6 @@
 const textElement = document.getElementById('typewriter-text');
 const paperElement = document.querySelector('.paper');
-const message = "For my dearest Lucy,\n\nPlaying this song feels like a playback of everything we've been through, and everytime I hear it, I'm reminded of how lucky I am to be loved by you. Looking back over the past years, who would've thought we'd end up with what we have now?? Seeing how far we've come and how much we've grown together makes me reallyyyy proud of us.\nI'll always be thankful for what we have and for giving me the privilege to be the one to get to know you, spend time with you, and the one to love you, and may this letter be a reminder of how easy it is to love you, and that you will always be loved. Know that even when everything gets loud and uncertain, I will always be here, choosing you over and over again.\nWith all that in mind, thought I'd ask...\nWill you be my valentine?";
+const message = "For my dearest Lucy,\n\nPlaying this song feels like a playback of everything we've been through, and everytime I hear it, I'm reminded of how lucky I am to be loved by you. Looking back over the past years, who would've thought we'd end up with what we have now?? Seeing how far we've come and how much we've grown together makes me reallyyyy proud of us.\nI'll always be thankful for a beautiful thing that we have, loveey, and for giving me the privilege to be the one to get to know you, spend time with you, and the one to love you, and may this letter be a reminder of how easy it is to love you, and that you will always be loved. Know that even when everything gets loud and uncertain, I will always be here, choosing you over and over again.\nWith all that in mind, thought I'd ask...\nWill you be my valentine?";
 
 let index = 0;
 const speed = 60; 
@@ -41,4 +41,5 @@ function createHeart() {
 
     document.body.appendChild(heart);
     setTimeout(() => { heart.remove(); }, duration * 1000);
+
 }
