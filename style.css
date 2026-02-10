@@ -1,0 +1,188 @@
+:root {
+    --primary: #ff7b9c;
+    --bg-color: #ffbaea;
+    --envelope-color: #f06292;
+    --envelope-dark: #d81b60;
+    --paper-color: #ffffff;
+    --heart-color: #ff1744;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    margin: 0;
+    overflow: hidden;
+}
+
+.envelope-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+/* The Base/Back of the Envelope */
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: var(--envelope-color);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* The Top Flap (Opener) */
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 120px;
+    background-color: var(--envelope-dark);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-radius: 15px;
+    transform-origin: top;
+    /* Closing: wait for letter (0.4s) */
+    transition: transform 0.4s ease-in-out 0.4s, z-index 0.1s 0.4s;
+}
+
+/* The Front Panel (Shoulders and Bottom Fold) */
+.front-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: var(--envelope-color);
+    /* Creates the side "shoulders" and bottom pocket look */
+    clip-path: polygon(0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+    border-radius: 15px;
+    filter: brightness(0.98);
+}
+
+/* The Letter */
+.letter {
+    position: absolute;
+    left: 20px;
+    bottom: 5px;
+    width: 260px;
+    height: 180px;
+    background: var(--paper-color);
+    z-index: 2;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease-in-out;
+}
+
+.text {
+    font-family: 'Georgia', serif;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+.gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.letter-gif {
+    width: 60px; /* Adjust size to fit your GIFs */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* The Heart Seal */
+.heart {
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    background: var(--heart-color);
+    z-index: 5;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--heart-color);
+    border-radius: 50%;
+}
+.heart::before { left: -15px; }
+.heart::after { top: -15px; }
+
+/* --- OPEN STATE (Triggered by Click) --- */
+
+/* Flap opens */
+.envelope-wrapper.open .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+    transition: transform 0.4s ease-in-out, z-index 0.1s 0.2s;
+}
+
+/* Letter slides up */
+.envelope-wrapper.open .letter {
+    transform: translateY(-115px);
+    transition: transform 0.4s ease-in-out 0.3s;
+}
+
+/* Heart scales slightly when open */
+.envelope-wrapper.open .heart {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.1);
+}
+
+/* --- FLOATING HEARTS ANIMATION --- */
+
+.floating-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Update this part in your style.css */
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    background-color: var(--heart-color);
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: floatUp var(--duration) linear infinite;
+    /* Width and height are now set by script.js */
+}
+
+.floating-heart::before, .floating-heart::after {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: inherit;
+    border-radius: 50%;
+}
+.floating-heart::before { left: -50%; }
+.floating-heart::after { top: -50%; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(45deg) scale(0); opacity: 0; }
+    20% { opacity: 0.5; }
+    100% { transform: translateY(-110vh) rotate(45deg) scale(1.5); opacity: 0; }
+}

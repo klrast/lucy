@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Lucy 💌</title>
+    <link rel="stylesheet" href="letter.css">
+    <style>
+        .music-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 240, 246, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .play-btn {
+            background: #d81b60;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: 'Georgia', serif;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+            transition: transform 0.2s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <div id="music-overlay" class="music-overlay" onclick="startEverything()">
+        <div class="play-btn">Read the Letter 💌</div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="sol.mp3.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="paper-container">
+        <div class="paper">
+            <div id="typewriter-text" class="text"></div>
+        </div>
+    </div>
+
+    <script src="typing.js"></script>
+    <script>
+        function startEverything() {
+            document.getElementById('music-overlay').style.display = 'none';
+            
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.4; 
+            music.play();
+
+            // Start the typing and hearts from typing.js
+            typeWriter(); 
+            setInterval(createHeart, 300);
+        }
+    </script>
+</body>
+</html>

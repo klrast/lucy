@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Lucy 💌</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #ffbaea;
+            font-family: 'Georgia', serif;
+        }
+
+        /* The container keeps everything centered */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            gap: 50px; 
+        }
+
+        /* Reserved space for buttons */
+        .btn-wrapper {
+            width: 160px; 
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 15px 45px;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            white-space: nowrap;
+        }
+
+        #yesBtn {
+            background-color: #ff1744;
+            color: white;
+            z-index: 10;
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #d81b60;
+            position: absolute; 
+            transition: all 0.2s ease-out;
+            z-index: 100;
+        }
+
+        /* Heart Animation */
+        .floating-heart {
+            position: absolute;
+            background-color: #ff4d6d;
+            transform: rotate(-45deg);
+            opacity: var(--opacity);
+            animation: move var(--duration) linear forwards;
+        }
+        .floating-heart::before, .floating-heart::after {
+            content: ''; width: 100%; height: 100%;
+            background-color: inherit; border-radius: 50%; position: absolute;
+        }
+        .floating-heart::before { top: -50%; left: 0; }
+        .floating-heart::after { left: 50%; top: 0; }
+
+        @keyframes move {
+            0% { bottom: -50px; transform: translateX(0) rotate(-45deg); }
+            100% { bottom: 110vh; transform: translateX(50px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts-container"></div>
+    
+    <div class="main-container">
+        <div class="btn-wrapper">
+            <button id="yesBtn" class="btn">Yes</button>
+        </div>
+
+        <div class="btn-wrapper" style="position: relative;">
+            <button id="noBtn" class="btn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        // Logic changed to 'click' so it dodges when the user tries to press it
+        noBtn.addEventListener('click', () => {
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            
+            const padding = 50; // Keep it away from the extreme edges
+            const randomX = Math.max(padding, Math.floor(Math.random() * (maxX - padding)));
+            const randomY = Math.max(padding, Math.floor(Math.random() * (maxY - padding)));
+            
+            noBtn.style.position = 'fixed'; 
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            window.location.href = "celebration.html";
+        });
+
+        // Heart logic
+        const container = document.getElementById('hearts-container');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            const size = Math.floor(Math.random() * 18) + 10;
+            heart.style.width = size + 'px';
+            heart.style.height = size + 'px';
+            const duration = Math.random() * 3 + 4;
+            heart.style.setProperty('--duration', duration + 's');
+            heart.style.setProperty('--opacity', Math.random() * 0.5 + 0.3);
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

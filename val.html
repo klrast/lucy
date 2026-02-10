@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Lucy 💌</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="floating-hearts-container" id="hearts-container"></div>
+
+    <div class="container">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <div class="message">
+                            <strong>Happy Valentine's Day!</strong>
+                        </div>
+                        
+                        <div class="gif-container">
+                            <img src="https://media.tenor.com/JcPATwwdUOQAAAAi/bubu-dudu-sseeyall.gif" alt="Valentine GIF" class="letter-gif">
+                            <img src="https://media.tenor.com/qb-sI_XqLqAAAAAj/bubu-dudu-sseeyall.gif" alt="Valentine GIF" class="letter-gif">
+                            <img src="https://media.tenor.com/0imRtuzqccIAAAAi/bubu-dudu-flower-gift.gif" alt="Valentine GIF" class="letter-gif">
+                        </div>
+                            <div class="message">
+                            <strong>Click Me!</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="front-panel"></div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        const wrapper = document.getElementById('envelopeWrapper');
+        
+        wrapper.addEventListener('click', () => {
+            wrapper.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
